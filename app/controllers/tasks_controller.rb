@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.new(task_params)
     if @task.save
       flash[:notice] = "Task successfully added!"
-      redirect_to list_path(@task.list)
+      redirect_to lists_path(@task.list)
     else
       render :new
     end
@@ -38,8 +38,15 @@ class TasksController < ApplicationController
     render :edit
   end
 
+  def done
+    @list = List.find(params[:list_id])
+    @task = Task.find(params[:id])
+    @task.update(done: true)
+    redirect_to lists_path(@task.list)
+  end
+
 private
   def task_params
-      params.require(:task).permit(:description)
+    params.require(:task).permit(:description)
   end
 end

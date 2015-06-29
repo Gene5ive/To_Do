@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20150629203728_add_boolean_to_tasks.rb
